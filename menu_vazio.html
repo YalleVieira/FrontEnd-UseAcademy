@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/menu_vazio.css">
+    <link href="https://fonts.googleapis.com/css2?family=Abhaya+Libre&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Abhaya+Libre&family=Noto+Sans:wght@500&display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Abhaya+Libre&family=Montserrat&family=Noto+Sans:wght@500&display=swap"
+        rel="stylesheet">
+    <title>Italocomi Restaurante</title>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+</head>
+
+<body>
+
+
+    <div class="container">
+        <header class="header">
+
+            <nav class="navbar">
+                <figure class="header__logo">
+                    <img src="/icones_Desafio_fullstack/LOGO.svg" alt="LOGO">
+                </figure>
+
+                <p class="header__welcome">Olá, Yalle!</p>
+
+                <div class="header__exit">
+                    <a class="" href="#">Sair</a>
+                </div>
+            </nav>
+
+        </header>
+
+        <main class="main">
+
+
+            <div class="main__topo">
+                <div class="btn btn__categorys main__categorys" id="categorys"></div>
+
+                <div class="main__search">
+                    <a class="product__registered" href="#">Produtos Cadastrados</a>
+
+                    <input type="text" placeholder="Buscar na categoria" class="input__search--product">
+
+                    <select class="select__box">
+                        <option disabled selected value="">Ordenar por (1)</option>
+                        <option value="menorpreco">Menor preço</option>
+                        <option value="maiorpreco">Maior preço</option>
+                    </select>
+                </div>
+            </div>
+
+
+            <article class="main__content">
+                <img src="/images/folhas.png" class="img_menu_empty">
+
+                <p class="mensage__menu--empty">Ops!<br>Nenhum produto cadastrado.</p>
+
+                <p class="mensage__register">Cadastre o seu primeiro produto e comece a vender agora mesmo</p>
+
+                <button type="button" class="btn btn__register--product " onclick="">Cadastrar produto</button>
+
+            </article>
+
+        </main>
+
+    </div>
+
+    <footer class="footer">
+        <p>2021 | Usemobile. Todos direitos reservados.</p>
+    </footer>
+
+</body>
+
+<script>
+
+    var defaultUrl = 'https://bootcampuseacademy.herokuapp.com/categories'
+
+    getCategorys(defaultUrl)
+
+    function getCategorys(url) {
+        return axios({
+            method: 'GET',
+            url,
+            data: {
+                limit: 20
+            }
+        }).then(response => {
+            createCategorys(response.data);
+        })
+    }
+
+
+    function createCategorys(data) {
+        const div = document.getElementById('categorys')
+        div.innerHTML = ''
+        for (let item of data) {
+            const d = document.createElement('div')
+            d.setAttribute('class', 'category')
+            d.append(createTag('p', `${item.name.toUpperCase()}`))
+            div.append(d)
+        }
+    }
+
+    function createTag(type, text) {
+        const tag = document.createElement(type)
+        const value = document.createTextNode(text)
+        tag.append(value)
+        return tag
+    }
+
+    function createButton(name, url) {
+        const b = createTag('button', name)
+    }
+
+</script>
+
+</html>
