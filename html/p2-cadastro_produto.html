@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/p2-cadastro_produto.css">
+    <link href="https://fonts.googleapis.com/css2?family=Abhaya+Libre&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Abhaya+Libre&family=Noto+Sans:wght@500&display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Abhaya+Libre&family=Montserrat&family=Noto+Sans:wght@500&display=swap"
+        rel="stylesheet">
+    <title>Italocomi Restaurante</title>
+</head>
+
+<body>
+
+
+    <div class="container">
+        <header class="header">
+
+            <nav class="navbar">
+                <figure class="header__logo">
+                    <img src="/icones_Desafio_fullstack/LOGO.svg" alt="LOGO">
+                </figure>
+
+                <p class="header__welcome">Olá, Yalle!</p>
+
+                <div class="header__exit">
+                    <a class="" href="/html/index.html">Sair</a>
+                </div>
+            </nav>
+
+        </header>
+
+        <main class="main__content">
+
+            <a class="product__registered" href="/html/menu.html">Produtos Cadastrados</a>
+            <p class="number__page">Etapa 1 de 2</p>
+            <p class="text__image">Selecione a foto do produto</p>
+
+            <div class="content">
+                <form class="upload__image">
+                    <div class="image_product image_product1" id="image_product1">
+                        <img class="img" src="/images/upload.svg" alt="Selecione a imagem de capa" id="img_1">
+                        <input type="file" name="image" accept="image/*" id="upload_1">
+                    </div>
+                    <div class="image_product2">
+                        <div class="image_product image_product_2" id="image_product_2">
+                            <img class="img" src="/images/upload.svg" alt="Selecione a segunda imagem" id="img_2">
+                            <input type="file" name="image" accept="image/*" id="upload_2">
+                        </div>
+                        <div class="image_product image_product3" id="image_product3">
+                            <img class="img" src="/images/upload.svg" alt="Selecione a última imagem" id="img_3">
+                            <input type="file" name="image" accept="image/*" id="upload_3">
+                        </div>
+                    </div>
+
+                </form>
+                <button type="button" class="btn btn__register--product " onclick="">Cadastrar Produto</button>
+            </div>
+        </main>
+
+    </div>
+
+    <footer class="footer">
+        <p>2021 | Usemobile. Todos direitos reservados.</p>
+    </footer>
+</body>
+
+<script>
+
+let photo1 = document.getElementById('img_1');
+let file1 = document.getElementById('upload_1');
+
+photo1.addEventListener('click', () => {
+    file1.click();
+});
+
+const chooseFile1 = document.getElementById("upload_1")
+const imgPreview1 = document.getElementById("image_product1")
+
+chooseFile1.addEventListener("change", function () {
+    getImgData1();
+});
+
+function getImgData1() {
+    const files = chooseFile1.files[0];
+    if(files) {
+        const fileReader = new FileReader();
+        fileReader.readAsDataURL(files);
+        fileReader.addEventListener("load", function() {
+            imgPreview1.style.display = "block";
+            imgPreview1.innerHTML = '<img src="' + this.result + '" id="file_1" />';
+        })
+    }
+}
+
+//imagem 2 - upload e preview da segunda imagem
+
+let photo2 = document.getElementById('img_2');
+let file2 = document.getElementById('upload_2');
+
+photo2.addEventListener('click', () => {
+    file2.click();
+});
+
+const chooseFile2 = document.getElementById("upload_2")
+const imgPreview2 = document.getElementById("image_product_2")
+
+chooseFile2.addEventListener("change", function () {
+    getImgData2();
+});
+
+function getImgData2() {
+    const files = chooseFile2.files[0];
+    if(files) {
+        const fileReader = new FileReader();
+        fileReader.readAsDataURL(files);
+        fileReader.addEventListener("load", function() {
+            imgPreview2.style.display = "block";
+            imgPreview2.innerHTML = '<img src="' + this.result + '" id="file_2" />';
+        })
+    }
+}
+
+//imagem 3 - upload e preview da segunda imagem
+
+let photo3 = document.getElementById('img_3');
+let file3 = document.getElementById('upload_3');
+
+photo3.addEventListener('click', () => {
+    file3.click();
+});
+
+const chooseFile3 = document.getElementById("upload_3")
+const imgPreview3 = document.getElementById("image_product3")
+
+chooseFile3.addEventListener("change", function () {
+    getImgData3();
+});
+
+function getImgData3() {
+    const files = chooseFile3.files[0];
+    if(files) {
+        const fileReader = new FileReader();
+        fileReader.readAsDataURL(files);
+        fileReader.addEventListener("load", function() {
+            imgPreview3.style.display = "block";
+            imgPreview3.innerHTML = '<img src="' + this.result + '" id="file_3" />';
+        })
+    }
+}
+
+</script>
+
+</html>

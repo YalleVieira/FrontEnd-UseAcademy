@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/categorias.css">
+    <link href="https://fonts.googleapis.com/css2?family=Abhaya+Libre&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Abhaya+Libre&family=Noto+Sans:wght@500&display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Abhaya+Libre&family=Montserrat&family=Noto+Sans:wght@500&display=swap"
+        rel="stylesheet">
+    <title>Italocomi Restaurante</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+</head>
+
+<body>
+
+
+    <div class="container">
+        <header class="header">
+
+            <nav class="navbar">
+                <figure class="header__logo">
+                    <img src="/icones_Desafio_fullstack/LOGO.svg" alt="LOGO">
+                </figure>
+
+                <p class="header__welcome">Olá, Yalle!</p>
+
+                <div class="header__exit">
+                    <a class="" href="/index.html">Sair</a>
+                </div>
+            </nav>
+
+        </header>
+
+        <main class="main">
+
+            <div class="main__search">
+                <a class="product__registered" href="/menu.html">Produtos Cadastrados</a>
+
+                <input type="text" placeholder="Buscar categoria" class="input__search--product">
+
+            </div>
+
+
+            <div id="main__content">
+                <div class="content" id="category">
+                    <div id="categoria"></div>
+                    
+                </div>
+            </div>
+
+
+        </main>
+
+    </div>
+
+    <footer class="footer">
+        <p>2021 | Usemobile. Todos direitos reservados.</p>
+    </footer>
+
+</body>
+
+<script>
+    const defaultUrl = "https://bootcampuseacademy.herokuapp.com/categories/"
+
+    function getCategory(url) {
+        return axios({
+            method: 'GET',
+            url,
+            data: {
+                limit: 20
+            }
+        }).then(response => {
+            createCategory(response.data)
+        })
+    }
+
+    getCategory(defaultUrl)
+
+    function createCategory(data) {
+        const div = document.getElementById('categoria')
+        div.innerHTML = ''
+        //console.log(data)
+
+        for (let item of data) {
+            const d = document.createElement('div')
+            d.setAttribute('class', 'item')
+            d.append(createTag('p', `${item.name.toUpperCase()}`))
+            div.append(d)
+        }
+    }
+
+    function createTag(type, text) {
+        const tag = document.createElement(type)
+        const value = document.createTextNode(text)
+        tag.append(value)
+        return tag
+    }
+
+    /* async function getContent() {
+        try {
+            const response = await fetch(url)
+            const data = await response.json()
+            getAll(data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    getContent();
+
+
+    function getAll(users) {
+        let output = ''
+        for (let user of users) {
+            output += `<li>${user.name}</li>`
+        }
+        document.querySelector('#categoria').innerHTML = output
+    } */
+
+
+
+
+</script>
+
+</html>
