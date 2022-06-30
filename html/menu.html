@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/menu.css">
+    <link href="https://fonts.googleapis.com/css2?family=Abhaya+Libre&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Abhaya+Libre&family=Noto+Sans:wght@500&display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Abhaya+Libre&family=Montserrat&family=Noto+Sans:wght@500&display=swap"
+        rel="stylesheet">
+    <title>Italocomi Restaurante</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+
+
+    <div class="container">
+        <header class="header">
+
+            <nav class="navbar">
+                <figure class="header__logo">
+                    <img src="/icones_Desafio_fullstack/LOGO.svg" alt="LOGO">
+                </figure>
+
+                <p class="header__welcome">Olá, Yalle!</p>
+
+                <div class="header__exit">
+                    <a class="" href="/html/index.html">Sair</a>
+                </div>
+            </nav>
+
+        </header>
+
+        <main class="main">
+
+
+            <div class="main__topo">
+                <div class="main__categorys" id="categoria">
+                </div>
+
+                <div class="main__search">
+                    <a class="product__registered" href="/html/menu.html">Produtos Cadastrados</a>
+
+                    <input type="text" placeholder="Buscar na categoria" class="input__search--product">
+
+                    <select class="select__box">
+                        <option disabled selected value="">Ordenar por (1)</option>
+                        <option value="menorpreco">Menor preço</option>
+                        <option value="maiorpreco">Maior preço</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="main__content">
+                <div class="content">
+                    <img class="image__product" src="/images/salada_polvo.png" alt="produto">
+                    <div class="description__product">
+                        <a class="link__product">Salada de polvo</a class="link__product">
+                        <h4>Serve 1 pessoa</h6>
+                            <p class="description">Polvo fresco com legumes refogados (Cenoura, cebola, pimentão, grão
+                                de bico e pepino)</p>
+                            <p class="value">R$150,00</p>
+                    </div>
+                    <div class="linha__vertical"></div>
+                    <div class="buttons">
+                        <a href="/html/html/pg1-editar.html" class="btn__edit" id="btn_product"><img
+                                src="/icones_Desafio_fullstack/ic_edit_orange0.png">Editar</a>
+                        <a href="/html/pg2-edital.html" class="btn__delete" id="btn_product"><img
+                                src="/icones_Desafio_fullstack/delete_orange.png">Excluir</a>
+                    </div>
+                </div>
+
+                <div class="content">
+                    <img class="image__product" src="/images/salada_polvo.png" alt="produto">
+                    <div class="description__product">
+                        <a class="link__product">Salada de polvo</a class="link__product">
+                        <h4>Serve 1 pessoa</h6>
+                            <p class="description">Polvo fresco com legumes refogados (Cenoura, cebola, pimentão, grão
+                                de bico e pepino)</p>
+                            <p class="value">R$150,00</p>
+                    </div>
+                    <div class="linha__vertical"></div>
+                    <div class="buttons">
+                        <a href="/html/pg1-editar.html" class="btn__edit" id="btn_product"><img
+                                src="/icones_Desafio_fullstack/ic_edit_orange0.png">Editar</a>
+                        <a href="/html/pg2-edital.html" class="btn__delete" id="btn_product"><img
+                                src="/icones_Desafio_fullstack/delete_orange.png">Excluir</a>
+                    </div>
+                </div>
+
+                <div id="cadastrar_produtos">
+                    <a href="/html/p1-cadastro_produto.html" class="btn__register--product ">Cadastrar mais produtos</a>
+                </div>
+
+            </div>
+
+        </main>
+
+    </div>
+
+    <footer class="footer navbar-fixed-bottom">
+        <p>2021 | Usemobile. Todos direitos reservados.</p>
+    </footer>
+
+</body>
+
+<script>
+    const defaultUrl = "https://bootcampuseacademy.herokuapp.com/categories/"
+    
+    function getCategory(url) {
+        return axios({
+            method: 'GET',
+            url,
+            data: {
+                limit: 20
+            }
+        }).then(response => {
+            createCategory(response.data)
+        })
+    }
+    
+    getCategory(defaultUrl)
+    
+    function createCategory(data) {
+        const div = document.getElementById('categoria')
+        div.innerHTML = ''
+        //console.log(data)
+    
+        for (let item of data) {
+            const d = document.createElement('div')
+            d.setAttribute('class', 'item')
+            d.append(createTag('p', `${item.name}`))
+            div.append(d)
+        }
+    }
+    
+    function createTag(type, text) {
+        const tag = document.createElement(type)
+        const value = document.createTextNode(text)
+        tag.append(value)
+        return tag
+    }
+        
+    </script>
+
+</html>
